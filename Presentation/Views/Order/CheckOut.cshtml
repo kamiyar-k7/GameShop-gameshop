@@ -1,0 +1,175 @@
+﻿@model Application.ViewModel.UserSide.CheckOutViewModel;
+
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a href="index.html">Home</a></li>
+
+
+            <li><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" data-prefix="fa" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <span class="fa fa-angle-right"></span> --></li>
+
+            <li><a asp-controller="Store" asp-action="Index">Store</a></li>
+
+
+            <li><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" data-prefix="fa" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <span class="fa fa-angle-right"></span> --></li>
+
+            <li><a asp-controller="Account" asp-action="MyCart" asp-route-Id="">Cart</a></li>
+
+
+            <li><svg class="svg-inline--fa fa-angle-right fa-w-8" aria-hidden="true" data-prefix="fa" data-icon="angle-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" data-fa-i2svg=""><path fill="currentColor" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg><!-- <span class="fa fa-angle-right"></span> --></li>
+
+            <li><span>Checkout</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+    <form asp-action="CheckOut" asp-controller="Order" method="post">
+    <div class="container">
+
+        <div class="nk-store nk-store-checkout">
+            <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Billing</span> Details</span></h3>
+
+            <!-- START: Billing Details -->
+            <div class="nk-gap"></div>
+           
+                <div class="row vertical-gap">
+                    <div class="col-lg-6">
+                        <div class="row vertical-gap">
+                            <div class="col-sm-6">
+                                <label for="fname">First Name <span class="text-main-1">*</span>:</label>
+                                <input required type="text" class="form-control required"  asp-for="Billing.FirstName" id="fname">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="lname">Last Name <span class="text-main-1">*</span>:</label>
+                                <input required type="text" class="form-control required" asp-for="Billing.LastName" id="lname">
+                            </div>
+                        </div>
+
+
+
+                        <div class="nk-gap-1"></div>
+                        <div class="row vertical-gap">
+                            <div class="col-sm-6">
+                                <label for="email">Email Address <span class="text-main-1">*</span>:</label>
+                                <input required type="email" class="form-control required" asp-for="Billing.Email" id="email">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="phone">Phone <span class="text-main-1">*</span>:</label>
+                                <input type="tel" class="form-control required" required asp-for="Billing.PhoneNumber" id="phone">
+                            </div>
+                        </div>
+
+                        <div class="nk-gap-1"></div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <label for="zip">Postcode<span class="text-main-1">*</span>:</label>
+                        <input type="tel" class="form-control required" required asp-for="Billing.PosstCode" id="zip">
+
+                        <div class="nk-gap-1"></div>
+                        <label for="city">City<span class="text-main-1">*</span>:</label>
+                        <input type="text" class="form-control required" required asp-for="Billing.City" id="city">
+
+                        <div class="nk-gap-1"></div>
+
+
+                    </div>
+
+                    <div style="width: 100%;padding-right: 15px;padding-left: 15px;">
+                        <label for="address">Address <span class="text-main-1">*</span>:</label>
+                        <input type="text" class="form-control required" required asp-for="Billing.Address" id="address">
+                    </div>
+                </div>
+           
+             <!-- END: Billing Details -->
+
+                <div class="nk-gap-2"></div>
+           
+
+                <label for="notes">Order Notes:</label>
+                <textarea class="form-control" asp-for="Billing.OrderNote" id="notes" placeholder="Order Notes" rows="6"></textarea>
+              
+            
+
+
+
+
+            <!-- START: Order Products -->
+            <div class="nk-gap-3"></div>
+            <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Your</span> Order</span></h3>
+            <div class="nk-gap"></div>
+            <div class="table-responsive">
+                <table class="nk-table nk-table-sm">
+                    <thead class="thead-default">
+                        <tr>
+                            <th class="nk-product-cart-title">Product</th>
+                            <th class="nk-product-cart-total">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+                            decimal all = 0;
+                            @if (Model != null)
+                            {
+                                @foreach (var product in Model.OrderDetails)
+                                {
+                                    <tr>
+                                        <td class="nk-product-cart-title">
+                                            @product.GameName  × @product.Quantity > @product.Platform
+                                        </td>
+                                        <td class="nk-product-cart-total">
+                                            @{
+                                                var total = product.Quantity * product.Price;
+                                                all += total;
+                                            }
+                                            @total
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+
+
+
+
+                            <tr class="nk-store-cart-totals-total">
+                                <td>
+                                    Total
+                                </td>
+                                <td>
+                                    € @all
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- END: Order Products -->
+
+            <div class="nk-gap-2"></div>
+            <button class="nk-btn nk-btn-rounded nk-btn-color-main-1" type="submit">Place Order</button>
+        </div>
+    </div>
+    <div class="nk-gap-2"></div>
+    </form>
+</div>
+
+
+
+
+
+
+

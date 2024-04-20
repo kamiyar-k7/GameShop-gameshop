@@ -1,0 +1,252 @@
+﻿@model Application.ViewModel.UserSide.ProductViewModel;
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="single-product-tab-area mg-t-0 mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="single-product-pr">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            <div id="myTabContent1" class="tab-content">
+
+                                @if (Model.Game.Trailer.Any())
+                                {
+
+                                    <div class="product-tab-list tab-pane fade active in" id="single-tab1">
+                                        <video src="~/assets/Trailers/@Model.Game.Trailer" alt="Trailer" controls style="max-width:90%; max-height:90%;">     </video>
+                                    </div>
+
+                                }
+
+
+                            </div>
+
+                            <ul id="single-product-tab">
+
+                                @if (Model.Game.ScreenShots.Any())
+                                {
+                                    @foreach (var item in Model.Game.ScreenShots)
+                                    {
+                                        <li class="active">
+                                            <a href="#single-tab1"><img src="~/assets/images/GameImages/@item" alt=""></a>
+                                        </li>
+                                    }
+                                }
+
+
+                            </ul>
+
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
+                            <div class="single-product-details res-pro-tb">
+                                <h1>@Model.Game.Name</h1>
+
+                                <div class="stars stars-example-css detail-stars">
+                                    <div class="review-rating">
+                                        <fieldset class="rating">
+                                            <input type="radio" id="star5" value="5" data-val="true" data-val-number="The field Rating must be a number." data-val-required="This Field is required" name="Game.Rating" @(Model.Game.Rating == 5 ? "checked" : "") disabled>
+                                            <label class="full" for="star5"></label>
+                                            <input type="radio" id="star4half" value="4.5" name="Game.Rating" @(Model.Game.Rating == 4.5 ? "checked" : "") disabled>
+                                            <label class="half" for="star4half"></label>
+                                            <input type="radio" id="star4" value="4" name="Game.Rating" @(Model.Game.Rating == 4 ? "checked" : "") disabled>
+                                            <label class="full" for="star4"></label>
+                                            <input type="radio" id="star3half" value="3.5" name="Game.Rating" @(Model.Game.Rating == 3.5 ? "checked" : "") disabled>
+                                            <label class="half" for="star3half"></label>
+                                            <input type="radio" id="star3" value="3" name="Game.Rating" @(Model.Game.Rating == 3 ? "checked" : "") disabled>
+                                            <label class="full" for="star3"></label>
+                                            <input type="radio" id="star2half" value="2.5" name="Game.Rating" @(Model.Game.Rating == 2.5 ? "checked" : "") disabled>
+                                            <label class="half" for="star2half"></label>
+                                            <input type="radio" id="star2" value="2" name="Game.Rating" @(Model.Game.Rating == 2 ? "checked" : "") disabled>
+                                            <label class="full" for="star2"></label>
+                                            <input type="radio" id="star1half" value="1.5" name="Game.Rating" @(Model.Game.Rating == 1.5 ? "checked" : "") disabled>
+                                            <label class="half" for="star1half"></label>
+                                            <input type="radio" id="star1" value="1" name="Game.Rating" @(Model.Game.Rating == 1 ? "checked" : "") disabled>
+                                            <label class="full" for="star1"></label>
+                                            <input type="radio" id="starhalf" value="0.5" name="Game.Rating" @(Model.Game.Rating == 0.5 ? "checked" : "") disabled>
+                                            <label class="half" for="starhalf"></label>
+                                        </fieldset>
+                                    </div>
+                                    <span class="text-danger field-validation-valid" data-valmsg-for="Game.Rating" data-valmsg-replace="true"></span>
+                                    <div class="clear"></div>
+                                </div>
+
+
+                                <div class="single-pro-size">
+                                    <h6>Price: </h6>
+                                    <span style="color:white; background-color:transparent; width:auto;"> @Model.Game.Price</span>
+                                </div>
+
+                                <div class="single-pro-size">
+                                    <h6>Genres: </h6>
+                                    @foreach (var genre in Model.Genres)
+                                    {
+                                        <span style="width:auto; color:white; background-color:transparent;">@genre.GenreName</span>
+
+                                    }
+
+                                </div>
+
+                                <div class="color-quality-pro">
+                                    <div class="color-quality-details">
+                                        <h5>Platforms:</h5>
+                                        @foreach (var plats in Model.Platforms)
+                                        {
+
+                                            <span style="color:white;">@plats.Name</span>
+                                        }
+                                    </div>
+                                    <div class="color-quality">
+                                        <h4>Quantity</h4>
+                                        <div class="quantity">
+                                            <div class="pro-quantity-changer">
+                                                <input type="text" value="@Model.Game.Quantity" style="background-color:#1b2a47; color:white;" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <br />
+                                    <div class="single-pro-size">
+                                        @if (Model.Game.Status == Domain.entities.GamePart.Game.GameStatus.Active)
+                                        {
+
+
+                                            <span style="color:white; background-color:transparent;">@Model.Game.Status.ToString()</span>
+
+                                        }
+                                        else if (Model.Game.Status == Domain.entities.GamePart.Game.GameStatus.InActive)
+                                        {
+
+                                            <span style="color:white; background-color:transparent;">@Model.Game.Status.ToString()</span>
+
+                                        }
+                                        else
+                                        {
+
+                                            <span style="color:white; background-color:transparent; width:auto; border:none;">@Model.Game.Status.ToString()</span>
+
+                                        }
+                                    </div>
+
+                                    <div class="clear"></div>
+
+                                </div>
+                                <div class="single-pro-cn">
+                                    <h3>Description: </h3>
+                                    <p>
+                                        @Model.Game.Description
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <a asp-area="Admin" asp-controller="Games" asp-action="EditGame" asp-route-Id="@Model.Game.Id" type="button" style="background-color:#152036; color:white;" class="btn btn-ctl-bt waves-effect waves-light">
+                                        Edit Game
+                                    </a>
+                                    <a asp-area="Admin" asp-controller="Games" asp-action="ListOfGames" type="button" style="background-color:#152036; color:white; border:none;" class="btn btn-ctl-bt waves-effect waves-light">
+                                        Back To Games
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@foreach (var comment in Model.Comments)
+{
+    <div class="single-pro-review-area mt-t-30 mg-b-30">
+        <div class="container-fluid">
+
+
+            <div class="row">
+
+
+
+                <div class="row">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                        <div class="review-content-section">
+                            <div class="review-content-section">
+
+                                <div class="card-block">
+
+                                    <div class="m-t-10">
+                                        <div class="txt-primary f-18 f-w-600">
+                                            <p>Rated:</p>
+                                        </div>
+                                        <div class="stars stars-example-css detail-stars">
+                                            <div class="review-rating">
+                                                <fieldset class="rating">
+                                                    <input type="radio" id="star5" value="5" data-val="true" data-val-number="The field Rating must be a number." data-val-required="This Field is required" name="Game.Rating" @(comment.Ratings == 5m ? "checked" : "") disabled>
+                                                    <label class="full" for="star5"></label>
+                                                    <input type="radio" id="star4half" value="4.5" name="Game.Rating" @(comment.Ratings == 4.5m ? "checked" : "") disabled>
+                                                    <label class="half" for="star4half"></label>
+                                                    <input type="radio" id="star4" value="4" name="Game.Rating" @(comment.Ratings == 4m ? "checked" : "") disabled>
+                                                    <label class="full" for="star4"></label>
+                                                    <input type="radio" id="star3half" value="3.5" name="Game.Rating" @(comment.Ratings == 3.5m ? "checked" : "") disabled>
+                                                    <label class="half" for="star3half"></label>
+                                                    <input type="radio" id="star3" value="3" name="Game.Rating" @(comment.Ratings == 3m ? "checked" : "") disabled>
+                                                    <label class="full" for="star3"></label>
+                                                    <input type="radio" id="star2half" value="2.5" name="Game.Rating" @(comment.Ratings == 2.5m ? "checked" : "") disabled>
+                                                    <label class="half" for="star2half"></label>
+                                                    <input type="radio" id="star2" value="2" name="Game.Rating" @(comment.Ratings == 2m ? "checked" : "") disabled>
+                                                    <label class="full" for="star2"></label>
+                                                    <input type="radio" id="star1half" value="1.5" name="Game.Rating" @(comment.Ratings == 1.5m ? "checked" : "") disabled>
+                                                    <label class="half" for="star1half"></label>
+                                                    <input type="radio" id="star1" value="1" name="Game.Rating" @(comment.Ratings == 1m ? "checked" : "") disabled>
+                                                    <label class="full" for="star1"></label>
+                                                    <input type="radio" id="starhalf" value="0.5" name="Game.Rating" @(comment.Ratings == 0.5m ? "checked" : "") disabled>
+                                                    <label class="half" for="starhalf"></label>
+                                                </fieldset>
+                                            </div>
+                                            <span class="text-danger field-validation-valid" data-valmsg-for="Game.Rating" data-valmsg-replace="true"></span>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mg-b-15 mg-t-15">
+                                    <span class="input-group-addon">User Name</span>
+                                    <input type="text" class="form-control" placeholder="@comment.UserName" readonly style="background-color:transparent;">
+                                </div>
+                                <div class="input-group mg-b-15">
+                                    <span class="input-group-addon">Title</span>
+                                    <input type="text" class="form-control" placeholder="@comment.Title" readonly style="background-color:transparent;">
+                                </div>
+                                <div class="input-group mg-b-15">
+                                    <span class="input-group-addon">Comment</span>
+                                    <input rows="5" class="form-control" placeholder="@comment.Comment" readonly style="background-color:transparent;"> 
+
+                                </div>
+                                <div class="input-group mg-b-15">
+                                    <span class="input-group-addon">Date</span>
+                                    <input type="datetime" class="form-control" placeholder="@comment.CreatedAt" readonly style="background-color:transparent;">
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <hr />
+
+
+    </div>
+
+}
+
+
+

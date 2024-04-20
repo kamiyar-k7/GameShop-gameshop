@@ -1,0 +1,375 @@
+﻿ @model Application.ViewModel.AdminSide.AdminBaseViewModel;
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"]</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/font-awesome.min.css">
+    <!-- nalika Icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/nalika-icon.css">
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/Adminpanel/css/owl.theme.css">
+    <link rel="stylesheet" href="~/Adminpanel/css/owl.transitions.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/normalize.css">
+    <!-- meanmenu icon CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/meanmenu.min.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/main.css">
+    <!-- morrisjs CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="~/Adminpanel/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="~/Adminpanel/css/calendar/fullcalendar.print.min.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/Adminpanel/css/responsive.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+</head>
+
+<body>
+ 
+
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+                <a href="index.html"><img class="main-logo" src="~/Adminpanel/img/logo/logo.png" alt="" /></a>
+                <strong><img src="~/Adminpanel/img/logo/logosn.png" alt="" /></strong>
+            </div>
+            <div class="nalika-profile">
+                <div class="profile-dtl">
+                    <a ><img src="~/assets/images/UserAvatar/@Model.Admin.UserAvatar" alt="" /></a>
+                    <h2><span class="min-dtn">@Model.Admin.UserName</span></h2>
+                </div>
+                <div class="profile-social-dtl">
+                    <ul class="dtl-social">
+                        <li><a href="#"><i class="icon nalika-facebook"></i></a></li>
+                        <li><a href="#"><i class="icon nalika-twitter"></i></a></li>
+                        <li><a href="#"><i class="icon nalika-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="">
+                            <a class="has-arrow" href="index.html">
+                                <i class="icon nalika-home icon-wrap"></i>
+                                <span class="mini-click-non">Home</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="ContactUs">Contact</a></li>
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="AboutUs">About</a></li>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-diamond icon-wrap"></i> <span class="mini-click-non">Manage Users</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Users"><span class="mini-sub-pro">Users</span></a></li>
+                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Admins"><span class="mini-sub-pro">Admins</span></a></li>
+                               
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-mail icon-wrap"></i> <span class="mini-click-non">Store</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+
+                                <li><a asp-area="Admin" asp-controller="Games" asp-action="ListOfGames"><span class="mini-sub-pro">View Games</span></a></li>
+                                <li><a asp-area="Admin" asp-controller="Games" asp-action="ListOfPlatforms" ><span class="mini-sub-pro">View Platforms</span></a></li>
+                                <li><a asp-area="Admin" asp-controller="Games" asp-action="ListOfGenres"><span class="mini-sub-pro">View Genres</span></a></li>
+
+                             </ul>
+                        </li>
+                     
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-bar-chart icon-wrap"></i> <span class="mini-click-non">Orders</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Bar Charts" asp-area="Admin" asp-action="ListOfOrders" asp-controller="Orders"><span class="mini-sub-pro">All Orders</span></a></li>
+                       
+                            
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-table icon-wrap"></i> <span class="mini-click-non">Comments</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Peity Charts" asp-area="Admin" asp-action="AllComments" asp-controller="Games"><span class="mini-sub-pro">All Comments</span></a></li>
+
+                            </ul>
+                        </li>
+                       
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="~/Adminpanel/img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-advance-area">
+
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                                <i class="icon nalika-menu-task"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                  
+
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                             
+                                              
+                                                <li class="nav-item">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                                        <i class="icon nalika-user nalika-user-rounded header-riht-inf" aria-hidden="true"></i>
+                                                        <span class="admin-name">@Model.Admin.UserName</span>
+                                                        <i class="icon nalika-down-arrow nalika-angle-dw nalika-icon"></i>
+                                                    </a>
+                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                     
+                                                        <li>
+                                                            <a  asp-controller="Users" asp-action="UserDetails" asp-route-Id="@Model.Admin.Id"><span class="icon nalika-user author-log-ic"></span> My Profile</a>
+                                                        </li>
+                                                       
+                                                       
+                                                        <li>
+                                                            <a   asp-controller="Account" asp-action="Logout" ><span class="icon nalika-unlocked author-log-ic"></span> Log Out</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                               
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul class="mobile-menu-nav">
+                                        <li class="">
+                                            <a class="has-arrow" href="index.html">
+                                                <i class="icon nalika-home icon-wrap"></i>
+                                                <span class="mini-click-non">Ecommerce</span>
+                                            </a>
+                                            <ul class="submenu-angle" aria-expanded="true">
+                                                <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a></li>
+                                                <li><a asp-area="Admin" asp-controller="Home" asp-action="ContactUs">Contact</a></li>
+                                                <li><a asp-area="Admin" asp-controller="Home" asp-action="AboutUs">About</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-diamond icon-wrap"></i> <span class="mini-click-non">Manage Users</span></a>
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Users"><span class="mini-sub-pro">Users</span></a></li>
+                                                <li><a asp-area="Admin" asp-controller="Users" asp-action="Admins"><span class="mini-sub-pro">Admins</span></a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-mail icon-wrap"></i> <span class="mini-click-non">Store</span></a>
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li><a asp-area="Admin" asp-controller="Games" asp-action="ListOfGames"><span class="mini-sub-pro">View Games</span></a></li>
+                                                <li><a asp-area="Admin" asp-controller="Games" asp-action="ListOfPlatforms"><span class="mini-sub-pro">View Platforms</span></a></li>
+                                                <li><a asp-area="Admin" asp-controller="Games" asp-action="ListOfGenres"><span class="mini-sub-pro">View Genres</span></a></li>
+                                          
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-bar-chart icon-wrap"></i> <span class="mini-click-non">Orders</span></a>
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li><a title="Bar Charts" asp-area="Admin" asp-action="ListOfOrders" asp-controller="Orders"><span class="mini-sub-pro">All Orders</span></a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><i class="icon nalika-table icon-wrap"></i> <span class="mini-click-non">Comments</span></a>
+                                            <ul class="submenu-angle" aria-expanded="false">
+                                                <li><a title="Peity Charts" asp-area="Admin" asp-action="AllComments" asp-controller="Games"><span class="mini-sub-pro">All Comments</span></a></li>
+
+                                            </ul>
+                                        </li>
+                                   
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu end -->
+            <div class="breadcome-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div class="breadcomb-wp">
+                                            <div class="breadcomb-icon">
+                                                <i class="icon nalika-home"></i>
+                                            </div>
+                                            <div class="breadcomb-ctn">
+                                                <h2>@ViewData["Title"]</h2>
+                                                <p>Welcome to  <span class="bread-ntd">@ViewData["Title"]</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- content  -->
+      @RenderBody();
+
+      @*   <div class="footer-copyright-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2018 <a href="https://colorlib.com/wp/templates/">Colorlib</a> All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> *@
+    </div>
+
+    <!-- jquery
+        ============================================ -->
+    <script src="~/Adminpanel/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/bootstrap.min.js"></script>
+    <!-- wow JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/wow.min.js"></script>
+    <!-- price-slider JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Adminpanel/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/metisMenu/metisMenu.min.js"></script>
+    <script src="~/Adminpanel/js/metisMenu/metisMenu-active.js"></script>
+    <!-- morrisjs JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/Adminpanel/js/sparkline/jquery.charts-sparkline.js"></script>
+    <!-- calendar JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/calendar/moment.min.js"></script>
+    <script src="~/Adminpanel/js/calendar/fullcalendar.min.js"></script>
+    <script src="~/Adminpanel/js/calendar/fullcalendar-active.js"></script>
+    <!-- float JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/flot/jquery.flot.js"></script>
+    <script src="~/Adminpanel/js/flot/jquery.flot.resize.js"></script>
+    <script src="~/Adminpanel/js/flot/jquery.flot.pie.js"></script>
+    <script src="~/Adminpanel/js/flot/jquery.flot.tooltip.min.js"></script>
+    <script src="~/Adminpanel/js/flot/jquery.flot.orderBars.js"></script>
+    <script src="~/Adminpanel/js/flot/curvedLines.js"></script>
+    <script src="~/Adminpanel/js/flot/flot-active.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/plugins.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="~/Adminpanel/js/main.js"></script>
+</body>
+
+</html>

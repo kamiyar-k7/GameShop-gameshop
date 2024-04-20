@@ -1,0 +1,163 @@
+﻿@model Application.ViewModel.AdminSide.AdminOrdersViewModel;
+
+
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="product-status-wrap">
+            <h4>Products List</h4>
+
+            <table>
+                <tbody>
+
+
+                    <tr>
+
+                        <th>Image</th>
+                        <th>Product Title</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Platfrom</th>
+
+                    </tr>
+
+                    @foreach (var item in Model.cartDeatails)
+                    {
+                        <tr>
+
+                            <td><img src="~/assets/images/GameImages/@item.ItemImage" alt=""></td>
+
+                            <a>
+                            <td>@item.GameName</td> </a>
+                            <td>@item.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Platform</td>
+
+
+                        </tr>
+                    }
+
+
+
+
+                </tbody>
+            </table>
+
+            <div class="custom-pagination">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-copyright-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="text-center custom-pro-edt-ds">
+
+                                <form method="post" asp-area="Admin" asp-controller="Orders" asp-action="ChangeStatus">
+                                    <select asp-for="OneOrder.Status" style="margin-bottom:10px;" class="form-control pro-edt-select form-control-primary">
+                                        <option value="">Select Status</option>
+
+                                        @foreach (var status in Html.GetEnumSelectList<Domain.entities.Cart.OrderStatus>())
+                                        {
+                                            <option value="@status.Value">@status.Text</option>
+                                        }
+                                    </select>
+
+                                    <input type="text" class="form-control" placeholder="Tracking Post Code" asp-for="OneOrder.TrackingCode">
+                                    <input hidden asp-for="OneOrder.CartId" />
+                                    <br />
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </form>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <br />
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="review-tab-pro-inner">
+               
+                <div id="myTabContent" class="tab-content custom-product-edit">
+                    <div class="product-tab-list tab-pane fade active in" id="description">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="review-content-section">
+                                    <div class="input-group mg-b-pro-edt">             
+                                            
+                                        <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i> First Name </span>
+                                        <input readonly asp-for="@Model.Location.FirstName" type="text" class="form-control">
+                                    </div>
+                                    <div class="input-group mg-b-pro-edt">
+                                        <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i>Last Name </span>
+                                        <input readonly asp-for="@Model.Location.LastName" type="text" class="form-control" >
+                                    </div>
+                                    <div class="input-group mg-b-pro-edt">
+                                        <span class="input-group-addon">Email</span>
+                                        <input type="email" class="form-control" readonly asp-for="@Model.Location.Email">
+                                    </div>
+                                    <div class="input-group mg-b-pro-edt">
+                                        <span class="input-group-addon">Phone Number</span>
+                                        <input type="tel" class="form-control" readonly asp-for="@Model.Location.PhoneNumber"  >
+                                    </div>
+                                    <div class="input-group mg-b-pro-edt">
+                                        <span class="input-group-addon">Address</span>
+                                        <textarea rows="5" class="form-control" readonly asp-for="@Model.Location.Address"> </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="review-content-section">
+                                    <div class="input-group mg-b-pro-edt">
+                                        <span class="input-group-addon">City</span>
+                                        <input type="text" class="form-control" readonly asp-for="@Model.Location.City">
+                                    </div>
+                                  
+                                    <div class="input-group mg-b-pro-edt">
+                                        <span class="input-group-addon">Post Code</span>
+                                        <input type="number" class="form-control" readonly asp-for="@Model.Location.PosstCode">
+                                    </div>
+                                    <div class="input-group mg-b-pro-edt">
+                                    
+                                        <span class="input-group-addon"><i class="icon nalika-like" aria-hidden="true"></i> Order Note</span>
+                                        <textarea class="form-control"  readonly asp-for="@Model.Location.OrderNote"></textarea> 
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+
+  <style>
+    .review-content-section input[type="text"],
+    .review-content-section input[type="email"],
+    .review-content-section input[type="tel"],
+    .review-content-section input[type="number"],
+    .review-content-section textarea {
+        background-color: transparent !important;
+    }
+   </style>

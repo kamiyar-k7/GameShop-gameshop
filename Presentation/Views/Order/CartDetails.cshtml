@@ -1,0 +1,269 @@
+﻿@model  Application.ViewModel.UserSide.CheckOutViewModel
+
+
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a asp-controller="Account" asp-action="Index">My Account</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Cart</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+    <div class="container">
+        <div class="nk-store nk-store-cart">
+            <div class="table-responsive">
+
+                <!-- START: Products in Cart -->
+                <table class="table nk-store-cart-products">
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            @foreach (var game in Model.OrderDetails)
+                            {
+
+
+                                <tr>
+                                    <td class="nk-product-cart-thumb">
+                                        <a asp-controller="Store" asp-action="Product" asp-route-Id="@game.GameId" class="nk-image-box-1 nk-post-image">
+                                            <img src="~/assets/images/GameImages/@game.ItemImage" alt="@game.GameName" width="100%" height="150px">
+                                        </a>
+                                    </td>
+                                    <td class="nk-product-cart-title">
+                                        <h5 class="h6">Product:</h5>
+                                        <div class="nk-gap-1"></div>
+
+                                        <h2 class="nk-post-title h4">
+                                            <a href="store-product.html">@game.GameName</a>
+                                        </h2>
+                                    </td>
+                                    <td class="nk-product-cart-price">
+                                        <h5 class="h6">Price:</h5>
+                                        <div class="nk-gap-1"></div>
+
+                                        <strong>€ @game.Price</strong>
+                                    </td>
+                                    <td class="nk-product-cart-price">
+                                        <h5 class="h6">Platform:</h5>
+                                        <div class="nk-gap-1"></div>
+
+                                        <strong>@game.Platform</strong>
+                                    </td>
+                                    <td class="nk-product-cart-quantity">
+                                        <h5 class="h6">Quantity:</h5>
+                                        <div class="nk-gap-1"></div>
+
+                                        <div class="nk-form">
+                                            <input type="number" class="form-control" value="@game.Quantity" min="1" max="100" readonly style="background-color: transparent">
+                                        </div>
+                                    </td>
+                                    <td class="nk-product-cart-total">
+                                        <h5 class="h6">Total: </h5>
+                                        <div class="nk-gap-1"></div>
+                                        @{
+                                            var total = game.Price * game.Quantity;
+                                        }
+                                        <strong>€ @total</strong>
+                                    </td>
+                                   
+                                </tr>
+                            }
+
+                        }
+
+
+                    </tbody>
+                </table>
+                <!-- END: Products in Cart -->
+
+            </div>
+            <div class="nk-gap-1"></div>
+          
+
+            <div class="clearfix"></div>
+            <div class="nk-gap-2"></div>
+            <div class="row vertical-gap">
+                <div class="container">
+
+                    <div class="nk-store nk-store-checkout">
+                        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Billing</span> Details</span></h3>
+
+                        <!-- START: Billing Details -->
+                        <div class="nk-gap"></div>
+
+                        <div class="row vertical-gap">
+                            <div class="col-lg-6">
+                                <div class="row vertical-gap">
+                                    <div class="col-sm-6">
+                                        <label for="fname">First Name <span class="text-main-1">*</span>:</label>
+                                        <input readonly type="text" class="form-control Readonly" asp-for="Billing.FirstName" id="fname">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="lname">Last Name <span class="text-main-1">*</span>:</label>
+                                        <input readonly type="text" class="form-control readonly" asp-for="Billing.LastName" id="lname">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="nk-gap-1"></div>
+                                <div class="row vertical-gap">
+                                    <div class="col-sm-6">
+                                        <label for="email">Email Address <span class="text-main-1">*</span>:</label>
+                                        <input readonly type="email" class="form-control readonly" asp-for="Billing.Email" id="email">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="phone">Phone <span class="text-main-1">*</span>:</label>
+                                        <input type="tel" class="form-control readonly" readonly asp-for="Billing.PhoneNumber" id="phone">
+                                    </div>
+                                </div>
+
+                                <div class="nk-gap-1"></div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="zip">Postcode<span class="text-main-1">*</span>:</label>
+                                <input type="tel" class="form-control readonly" readonly asp-for="Billing.PosstCode" id="zip">
+
+                                <div class="nk-gap-1"></div>
+                                <label for="city">City<span class="text-main-1">*</span>:</label>
+                                <input type="text" class="form-control readonly" readonly asp-for="Billing.City" id="city">
+
+                                <div class="nk-gap-1"></div>
+
+
+                            </div>
+
+                            <div style="width: 100%;padding-right: 15px;padding-left: 15px;">
+                                <label for="address">Address <span class="text-main-1">*</span>:</label>
+                                <input type="text" class="form-control readonly" readonly asp-for="Billing.Address" id="address">
+                            </div>
+                        </div>
+
+                        <!-- END: Billing Details -->
+
+                        <div class="nk-gap-2"></div>
+
+
+                        <label for="notes">Order Notes:</label>
+                        <textarea readonly style="background-color:transparent;" class="form-control" asp-for="Billing.OrderNote" id="notes" placeholder="Order Notes" rows="6"></textarea>
+
+
+
+
+
+
+                        <!-- START: Order Products -->
+                        <div class="nk-gap-3"></div>
+                        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Your</span> Order</span></h3>
+                        <div class="nk-gap"></div>
+                        <div class="table-responsive">
+                            <table class="nk-table nk-table-sm">
+                                <thead class="thead-default">
+                                    <tr>
+                                        <th class="nk-product-cart-title">Product</th>
+                                        <th class="nk-product-cart-total">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                                        decimal all = 0;
+                                        @if (Model != null)
+                                        {
+                                            @foreach (var product in Model.OrderDetails)
+                                            {
+                                                <tr>
+                                                    <td class="nk-product-cart-title">
+                                                        @product.GameName  × @product.Quantity > @product.Platform
+                                                    </td>
+                                                    <td class="nk-product-cart-total">
+                                                        @{
+                                                            var total = product.Quantity * product.Price;
+                                                            all += total;
+                                                        }
+                                                        @total
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+
+
+
+
+                                        <tr class="nk-store-cart-totals-total">
+                                            <td>
+                                                Total
+                                            </td>
+                                            <td>
+                                                € @all
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- END: Order Products -->
+
+                        <div class="nk-gap-2"></div>
+                     
+                    </div>
+                </div>
+               
+            </div>
+
+            <div class="nk-gap-2"></div>
+
+
+
+      
+
+
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="nk-gap-2"></div>
+
+
+
+
+
+
+</div>
+
+
+
+<style>
+   
+    .nk-store-checkout input[type="text"],
+    .nk-store-checkout input[type="email"],
+    .nk-store-checkout input[type="tel"],
+    .nk-store-checkout textarea {
+        background-color: transparent;
+    }
+
+</style>

@@ -1,0 +1,78 @@
+﻿@model Application.ViewModel.UserSide.UserDeatailViewModel;
+
+
+<div class="nk-gap"></div>
+<div class="container">
+    <div class="nk-gap"></div>
+    <div class="row vertical-gap" style="justify-content:center;">
+
+        <div class="col-lg-7">
+            <h3 class="nk-decorated-h"><span><span class="text-main-1">Edit</span> Account</span></h3>
+            <div class="nk-gap"></div>
+            <!-- START: Tabs  -->
+
+            <div class="tab-content tabs">
+
+
+                <div class="nk-gap"></div>
+
+
+                <form asp-action="EditAccount" asp-controller="Account" enctype="multipart/form-data" method="post">
+
+                    <div id="imagePreview" class="mb-3 text-center">
+
+
+                        @if (string.IsNullOrEmpty(Model.Avatar))
+                        {
+                            <img id="preview" src="~/assets/images/UserAvatar" alt="none" style="max-width: 100%; max-height: 300px; ">
+                        }
+                        else
+                        {
+                            <img id="preview" src="~/assets/images/UserAvatar/@Model.Avatar" alt="none" style="max-width: 100%; max-height: 300px; ">
+                        }
+                    </div>
+
+                    <div class="mb-3">
+                    
+                        <input class="form-control bg-dark" asp-for="@Model.AvatarForm" type="file" id="formFile" onchange="previewImage(event)">
+                    </div>
+
+
+
+
+                    <div class="nk-gap"></div>
+               
+                    <input type="hidden" asp-for="@Model.UserId" />
+                    <input type="text" class="form-control required" placeholder="@Model.Name" asp-for="@Model.Name">
+                    <br />
+                    <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Submit</button>
+                    &nbsp;
+                    <button href="#" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Cancel</button>
+
+                </form>
+
+                <div class="nk-gap"></div>
+
+            </div>
+
+            <!-- END: Tabs -->
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('preview');
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            preview.src = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+    }
+</script>

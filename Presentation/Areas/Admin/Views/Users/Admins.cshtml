@@ -1,0 +1,49 @@
+﻿@model Application.ViewModel.AdminSide.AdminsViewModel;
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="product-status-wrap">
+        <h4>Users List</h4>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Avatar</th>
+                    <th>User Name</th>
+                    <th>Email Address</th>
+                    <th>Date Created</th>
+                    <th>ID</th>
+                    <th>Setting</th>
+                </tr>
+                @foreach (var users in Model.Admins)
+                {
+                        <tr>
+                            <td><img src="~/assets/images/UserAvatar/@users.ScreenShot" alt="none"></td>
+                            <td>@users.UserName</td>
+                            <td>@users.Email</td>
+                            <td>@users.Created</td>
+                            <td>@users.Id</td>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Users" asp-action="UserDetails" asp-route-Id="@users.Id" style="padding:5px;" data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" type="button" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a asp-area="Admin" asp-controller="Users" asp-action="DeleteUser" asp-route-Id="@users.Id" style="padding:5px;" data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" type="button" onclick="return confirm('are you sure you want Delete User ?')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </td>
+                        </tr>
+                }
+
+
+            </tbody>
+        </table>
+
+        <div class="custom-pagination">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

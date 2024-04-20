@@ -1,0 +1,64 @@
+﻿@model Application.ViewModel.AdminSide.AdminPlatformsViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="product-status-wrap">
+            <h4>Products List</h4>
+            <div class="add-product">
+                <a asp-area="Admin" asp-controller="Games" asp-action="AddNewPlatform">Add Platform</a>
+            </div>
+            <table>
+                <tbody>
+                 
+                    <tr>
+                        <th>ID</th>
+                        <th>Platform Title</th>
+                       
+                        <th>Setting</th>
+                    </tr>
+                    @foreach (var plat in Model.ListOfPlats)
+                    {
+                        <tr>
+                            <td>@plat.Id</td>
+                            <td>@plat.Name</td>
+
+                        <td>
+                            <a asp-area="Admin" asp-controller="Games" asp-action="EditPLatform" asp-route-Id="@plat.Id" style="padding:5px;" data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" type="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            <a asp-area="Admin" asp-controller="Games" asp-action="RemovePlatform" asp-route-Id="@plat.Id" style="padding:5px;" data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" type="button" onclick="return confirm('are you sure you want Delete Platfrom ?')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                        </td>
+
+                        </tr>
+                    }
+                 
+
+           
+                </tbody>
+            </table>
+        <div class="custom-pagination">
+            <ul class="pagination">
+
+                @if (ViewBag.PageId > 1)
+                {
+                    <li class="page-item"><a class="page-link" href="/Admin/Games/ListOFGames?pageid=@(ViewBag.PageId - 1)">Previous</a></li>
+                }
+
+                @for (int i = 1; i <= ViewBag.pagecount; i++)
+                {
+                    <li class="page-item"><a class="page-link @(((int)ViewBag.PageId == i) ? "active" : "")" href="/Admin/Games/ListOFGames?pageId=@i">@i</a></li>
+                }
+
+                @if (ViewBag.PageId < ViewBag.pagecount)
+                {
+                    <li class="page-item"><a class="page-link" href="/Admin/Games/ListOFGames?pageId=@(ViewBag.PageId + 1)">Next</a></li>
+                }
+
+            </ul>
+        </div>
+
+        </div>
+    </div>

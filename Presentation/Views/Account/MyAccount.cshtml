@@ -1,0 +1,183 @@
+﻿@model Application.ViewModel.UserSide.UserAccountViewModel;
+
+
+<div class="nk-gap"></div>
+<div class="container">
+    <div class="nk-gap"></div>
+    <div class="row vertical-gap" style="justify-content:center;">
+
+        <div class="col-lg-7">
+            <h3 class="nk-decorated-h"><span><span class="text-main-1">@Model.Deatail.Name</span> Account</span></h3>
+            <div class="nk-gap"></div>
+            <!-- START: Tabs  -->
+            <div class="nk-tabs">
+
+                <ul class="nav nav-tabs tabbuts" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active show" href="#tabs-1-1" role="tab" data-toggle="tab" aria-selected="false">My Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tabs-1-2" role="tab" data-toggle="tab" aria-selected="false">My Comments</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tabs-1-3" role="tab" data-toggle="tab" aria-selected="true">My Orders</a>
+                    </li>
+                </ul>
+
+
+                <div class="tab-content tabs">
+
+                    <div role="tabpanel" class="tab-pane fade active show" id="tabs-1-1">
+                        <div class="nk-gap"></div>
+                        @if (Model.Deatail.Avatar != null)
+                        {
+                            <div>
+                                <img src="~/assets/Images/UserAvatar/@Model.Deatail.Avatar" alt="none" width="100%" height="200px" class="pt-4" />
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <img src="~/assets/images/UserAvatar/1200_1.png" alt="none" width="100%" height="200px" class="pt-4" />
+                            </div>
+                        }
+
+                        <div class="nk-gap"></div>
+                        <h3 class="pt-4"><span class="text-main-1 font-weight-light pt-4">UserName: </span>@Model.Deatail.Name</h3>
+                        <h3 class="pt-4"><span class="text-main-1 font-weight-light pt-4">Email: </span>@Model.Deatail.Email</h3>
+                        <h3 class="pt-4"><span class="text-main-1 font-weight-light pt-4">Creatation Date: </span>@Model.Deatail.DateTime</h3>
+                        <a  asp-action="EditAccount" asp-controller="Account" asp-route-Id="@Model.Deatail.UserId" class="nk-btn nk-btn-rounded nk-btn-color-main-1">Edit Details</a>
+
+                        <div class="nk-gap"></div>
+                    </div>
+
+
+                    <div role="tabpanel" class="tab-pane fade" id="tabs-1-2">
+                        <div class="nk-gap"></div>
+                        @foreach (var item in Model.Comments)
+                        {
+
+                            <div class="nk-comment">
+                                <div class="nk-comment-meta">
+                                    <img src="~/assets/images/UserAvatar/@Model.Deatail.Avatar" alt="none" class="rounded-circle" width="35"> by @Model.Deatail.Name in @item.CreatedAt About <a asp-action="Product" asp-controller="Store" asp-route-Id="@item.GameId">@item.GameName</a>
+
+                                    @if (item.Ratings != 0)
+                                    {
+
+                                        // Calculate the number of full stars and half star based on the Rating value
+                                        int fullStars = (int)Math.Floor((decimal)item.Ratings);
+                                        bool hasHalfStar = (decimal)item.Ratings - fullStars >= 0.5m;
+
+                                        <div class="nk-product-rating" data-rating="@item.Ratings">
+                                            @for (int i = 0; i < 5; i++)
+                                            {
+                                                if (i < fullStars)
+                                                {
+
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                else if (hasHalfStar && i == fullStars)
+                                                {
+
+                                                    <i class="fas fa-star-half"></i>
+                                                }
+                                                else
+                                                {
+
+                                                    <i class="far fa-star"></i>
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                                <div class="nk-comment-text">
+                                    <p>Title : <span>@item.Title</span> </p>
+                                    <p> @item.Comment </p>
+                                </div>
+                            </div>
+                            <div class="nk-gap"></div>
+                        }
+
+
+
+
+                    </div>
+
+
+                    <!-- START: orders -->
+                    <div role="tabpanel" class="tab-pane fade" id="tabs-1-3">
+                        <div class="nk-gap"></div>
+                        <div >
+
+                          
+                             @if(Model.Orders.Any() && Model.Orders != null)
+                            {
+                                foreach (var item in Model.Orders.OrderBy(x=> x.Status) )
+                                {
+                                    <div class="nk-team">
+                                        <div class="nk-team-logo">
+                                            <img src="assets/images/team-1-lg.jpg" alt="">
+                                        </div>
+                                        <div class="nk-team-cont">
+                                            <h3 class="h5 mb-20"><span class="text-main-1">Cart Id:</span> @item.CartId </h3>
+                                            <h3 class="h5 mb-20"><span class="text-main-1">Cart Price:</span> @item.Price </h3>
+                                            <h3 class="h5 mb-20"><span class="text-main-1">Cart Date:</span> @item.RegestredDate </h3>
+
+                                            @if(item.TrackingPostCode != null)
+                                            {
+                                                <h3 class="h5 mb-20"><span class="text-main-1">Cart Post Code:</span> @item.TrackingPostCode </h3>
+                                            }
+                                            else
+                                            {
+                                                <h3 class="h5 mb-20"><span class="text-main-1">Cart Post Code:</span> Tracking Post Code Not Set Yet </h3>
+                                            }
+
+                                            <h4 class="h6 mb-5">Status:</h4>
+                                            <a href="tournaments-teammate.html">@item.Status.ToString()</a>
+                                            <br />
+                                            <a asp-controller="Order" asp-action="CartDetails" asp-route-Id="@item.CartId" class="nk-btn nk-btn-rounded nk-btn-color-main-1">View Details</a>
+
+                                        </div>
+                                    </div>
+                                }
+                            } 
+                          
+
+                           
+                         
+
+                        </div>
+                        <div class="nk-gap"></div>
+                    </div>
+                    <!-- END: orders -->
+                </div>
+            </div>
+            <!-- END: Tabs -->
+        </div>
+    </div>
+
+</div>
+
+
+<style>
+
+    .tabbuts {
+        display: flex;
+        flex-direction: roww;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+    }
+
+    .tabs {
+     
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+

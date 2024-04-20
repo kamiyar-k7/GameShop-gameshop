@@ -1,0 +1,184 @@
+﻿@model Application.ViewModel.AdminSide.UserDetailViewModel;
+
+@{
+	Layout = "_AdminLayout";
+}
+
+<form asp-area="Admin" asp-controller="Users" asp-action="EditUser" enctype="multipart/form-data" method="post">
+
+    <div class="single-product-tab-area mg-b-30">
+        <!-- Single pro tab review Start-->
+        <div class="single-pro-review-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="review-tab-pro-inner">
+                            <ul id="myTab3" class="tab-review-design">
+                                <li class="active"><a href="#description"><i class="icon nalika-edit" aria-hidden="true"></i> Edit User Information</a></li>
+                                <li><a href="#reviews"><i class="icon nalika-picture" aria-hidden="true"></i> User Avatar</a></li>
+
+                            </ul>
+                          
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                    
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="review-content-section">
+                                                    <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
+                                                        <input type="text" class="form-control" placeholder="First Name" asp-for="@Model.User.UserName">
+                                                    </div>
+                                                    <div class="input-group mg-b-pro-edt">
+                                                        <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
+                                                        <input type="text" class="form-control" placeholder="Email" asp-for="User.Email">
+                                                    </div>
+                                                 
+                                                </div>
+                                            </div>
+                                      
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">TT</span>
+                                                <input type="text" class="form-control" placeholder="Edit User Roles" readonly style="color:#152036; background-color:#152036;">
+                                            </div>
+                                        
+                                            <div class="form-radio">
+                                                @foreach (var role in Model.AllRoles)
+                                                {
+                                                    if(Model.SelectedRoles.Any(x => x.Id == role.Id))
+                                                    {
+                                                        <div class="radio radiofill">
+                                                            <label>
+                                                                <input type="checkbox" checked name="selectedroles" value="@role.Id"><i class="helper"></i>@role.RoleName
+                                                            </label>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="radio radiofill">
+                                                            <label>
+                                                                <input type="checkbox" name="selectedroles" value="@role.Id"><i class="helper"></i>@role.RoleName
+                                                            </label>
+                                                        </div>
+                                                    }
+                                              
+                                                }
+
+                                            </div>
+                                          </div>
+
+                                        </div>
+
+                                
+                                    
+                                </div>
+
+
+                                <div class="product-tab-list tab-pane fade" id="reviews">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="pro-edt-img">
+                                                            <div id="imagePreview" class="mb-3 text-center">
+                                                                @if (string.IsNullOrEmpty(Model.User.UserAvatar))
+                                                                {
+                                                                    <img id="preview" src="" alt="none" >
+                                                                }
+                                                                else
+                                                                {
+                                                                    <img id="preview" src="~/assets/images/UserAvatar/@Model.User.UserAvatar" alt="Image Preview" >
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+
+                                                                <div class="product-edt-pix-wrap">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon">TT</span>
+                                                                        <input type="text" class="form-control" placeholder="Edit User Avatar" readonly style="color:#152036; background-color:#152036;">
+                                                                    </div>
+
+
+                                                                    <div class="row">
+
+                                                                        <div class="col-lg-6">
+                                                                            <div class="product-edt-remove">
+                                                                                <a asp-area="admin" asp-controller="Users" asp-action="DeleteUserAvatar" asp-route-Id="@Model.User.Id" style="margin-bottom: 20px; margin-top:20px;" type="button" class="btn btn-ctl-bt waves-effect waves-light" onclick="return confirm('are you sure you want Delete User Avatar ?')">
+                                                                                    Remove
+                                                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                                                </a>
+                                                                                <br />
+                                                                                <input type="file" asp-for="@Model.User.pictureFile" class="btn btn-ctl-bt waves-effect waves-light" id="formFile" onchange="previewImage(event)">
+                                                                               
+                                                                                    
+                                                                                </input>
+                                                                            </div>
+
+                                                                           
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer-copyright-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="text-center custom-pro-edt-ds">
+                        <button type="submit" class="btn btn-ctl-bt waves-effect waves-light m-r-10">
+                            Save
+                        </button>
+                        <a  asp-area="Admin" asp-action="UserDetails" asp-controller="Users" asp-route-id="@Model.User.Id" type="submit" class="btn btn-ctl-bt waves-effect waves-light">
+                            Discard
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+   
+    <input asp-for="User.Id" hidden />
+ 
+</form>
+
+
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('preview');
+        const file = input.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            preview.src = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+    }
+</script>

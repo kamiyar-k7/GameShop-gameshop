@@ -1,0 +1,522 @@
+﻿@model Application.ViewModel.UserSide.ProductViewModel;
+
+
+
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a asp-controller="Store" asp-action="Index">Store</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>@Model.Game.Name </span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+
+
+
+    <div class="container">
+        <div class="row vertical-gap">
+            <div class="col-lg-8">
+                <div class="nk-store-product">
+                   
+                        <div class="row vertical-gap">
+                     
+                            <div class="col-md-6">
+                                <!-- START: Product Photos -->
+                                <div class="nk-popup-gallery">
+                                    @if (Model.Game.Trailer != null)
+                                    {
+                                        <div class="nk-gallery-item-box">
+                                        <a href="~/assets/trailers/@Model.Game.Trailer">
+                                            <video src="~/assets/Trailers/@Model.Game.Trailer" alt="" controls style="width: 100%; height: 100%;"></video>
+                                            </a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p>There is no Trailer</p>
+                                    }
+
+
+                                    <div class="nk-gap-1"></div>
+                                    <div class="row vertical-gap sm-gap">
+                                        @foreach (var screenshot in Model.Game.ScreenShots)
+                                        {
+                                            <div class="col-6 col-md-4">
+                                                <div class="nk-gallery-item-box">
+                                                    <a href="~/assets/images/GameImages/@screenshot" class="nk-gallery-item" data-size="622x942">
+                                                        <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
+                                                        <img src="~/assets/images/GameImages/@screenshot" alt="error" style="width:100%;">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        }
+
+
+                                    </div>
+
+                                </div>
+                                <!-- END: Product Photos -->
+                            </div>
+                 
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <form asp-controller="Order" asp-action="AddToCart" method="post" class="nk-product-addtocart">
+                                <div class="col-md-6">
+
+                                    <h2 class="nk-product-title h3">  @Model.Game.Name </h2>
+
+                                    <select required style="width:auto;" class="form-control" asp-for="@Model.Platformid">
+                                        <option value="" disabled selected>Select Platform</option>
+
+                                        @foreach (var plats in Model.Platforms)
+                                        {
+                                            if (plats != null)
+                                            {
+                                                <option value="@plats.Id">@plats.Name</option>
+                                            }
+
+
+                                        }
+
+
+
+                                    </select>
+
+                                    <div class="nk-product-description">
+                                        <p>@Model.Game.Description.</p>
+                                    </div>
+
+                                    <!-- START: Add to Cart -->
+                                    <div class="nk-gap-2"></div>
+
+                                    <div class="nk-product-price">€  @Model.Game.Price</div>
+                                    <div class="nk-gap-1"></div>
+
+                                    <div class="input-group">
+                                        <input hidden asp-for="@Model.Game.Id" />
+                                        <input type="number" class="form-control" asp-for="@Model.Quantity" min="1" max="3">
+                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Add to Cart</button>
+                                    </div>
+
+                                    <div class="nk-gap-3"></div>
+                                    <!-- END: Add to Cart -->
+                                    <!-- START: Meta -->
+                                    <div class="nk-product-meta">
+
+                                        <div>
+
+                                            <strong>Categories</strong>:
+                                            @foreach (var item in Model.Genres)
+                                            {
+                                                if (item != null)
+                                                {
+                                                    <p>@item.GenreName ,</p>
+                                                }
+
+                                            }
+
+                                        </div>
+
+
+                                        <div><strong>Compony</strong>: <a href="#">@Model.Game.Company</a></div>
+                                    </div>
+                                    <!-- END: Meta -->
+                                </div>
+                            </form>
+
+                        }
+                        else
+                        {
+                            <form asp-controller="Store" asp-action="Product" method="post" asp-route-Id="@Model.Game.Id" class="nk-product-addtocart">
+                                <div class="col-md-6">
+
+                                    <h2 class="nk-product-title h3">  @Model.Game.Name </h2>
+
+                                    <select style="width:auto;" class="form-control" asp-for="@Model.Platformid">
+                                        <option value="" disabled selected>Select Platform</option>
+
+                                        @foreach (var plats in Model.Platforms)
+                                        {
+                                            if (plats != null)
+                                            {
+                                                <option value="@plats.Id">@plats.Name</option>
+                                            }
+
+
+                                        }
+
+
+
+                                    </select>
+
+                                    <div class="nk-product-description">
+                                        <p>@Model.Game.Description.</p>
+                                    </div>
+
+                                    <!-- START: Add to Cart -->
+                                    <div class="nk-gap-2"></div>
+
+                                    <div class="nk-product-price">€  @Model.Game.Price</div>
+                                    <div class="nk-gap-1"></div>
+
+                                    <div class="input-group">
+                                        <input hidden asp-for="@Model.Game.Id" />
+                                        <input type="number" class="form-control" asp-for="@Model.Quantity" min="1" max="3" value="1">
+                                        <button class="nk-btn nk-btn-rounded nk-btn-color-main-1">Add to Cart</button>
+                                    </div>
+
+                                    <div class="nk-gap-3"></div>
+                                    <!-- END: Add to Cart -->
+                                    <!-- START: Meta -->
+                                    <div class="nk-product-meta">
+
+                                        <div>
+
+                                            <strong>Categories</strong>:
+                                            @foreach (var item in Model.Genres)
+                                            {
+                                                if (item != null)
+                                                {
+                                                    <p>@item.GenreName ,</p>
+                                                }
+
+                                            }
+
+                                        </div>
+
+
+                                        <div><strong>Compony</strong>: <a href="#">@Model.Game.Company</a></div>
+                                    </div>
+                                    <!-- END: Meta -->
+                                </div>
+                            </form>
+
+                        }
+
+                        </div>
+
+
+
+
+                
+
+
+
+                    <!-- START: Share -->
+                    <div class="nk-gap-2"></div>
+                    <div class="nk-post-share">
+                        <span class="h5">Share Product:</span>
+                        <ul class="nk-social-links-2">
+                            <li><span class="nk-social-facebook" title="Share page on Facebook" data-share="facebook"><span class="fab fa-facebook"></span></span></li>
+                            <li><span class="nk-social-google-plus" title="Share page on Google+" data-share="google-plus"><span class="fab fa-google-plus"></span></span></li>
+                            <li><span class="nk-social-twitter" title="Share page on Twitter" data-share="twitter"><span class="fab fa-twitter"></span></span></li>
+                            <li><span class="nk-social-pinterest" title="Share page on Pinterest" data-share="pinterest"><span class="fab fa-pinterest-p"></span></span></li>
+
+                            <!-- Additional Share Buttons
+                                <li><span class="nk-social-linkedin" title="Share page on LinkedIn" data-share="linkedin"><span class="fab fa-linkedin"></span></span></li>
+                                <li><span class="nk-social-vk" title="Share page on VK" data-share="vk"><span class="fab fa-vk"></span></span></li>
+                            -->
+                        </ul>
+                    </div>
+                    <!-- END: Share -->
+
+                    <div class="nk-gap-2"></div>
+                    <!-- START: Tabs -->
+                    <div class="nk-tabs">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#tab-description" role="tab" data-toggle="tab">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#tab-reviews" role="tab" data-toggle="tab">Reviews (@Model.Comments.Count)</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+
+                            <!-- START: Tab Description -->
+                            <div role="tabpanel" class="tab-pane fade show active" id="tab-description">
+                                <div class="nk-gap"></div>
+                                <strong class="text-white">Release Date: @Model.Game.ReleaseDate</strong>
+                                <div class="nk-gap"></div>
+                                <p>@Model.Game.Description</p>
+
+                                <div class="nk-product-info-row row vertical-gap">
+
+                                    <div class="col-md-3">
+                                        <div class="nk-gap"></div>
+                                        <strong class="text-white">Genre:</strong>
+                                        <div class="nk-gap"></div> 
+                                       
+                                            @foreach (var Genre in Model.Genres)
+                                            {
+                                               if(Genre != null)
+                                               {
+                                                <p> @Genre.GenreName </p>
+                                               }
+                                          
+                                            }
+                                        
+                                      
+                                        <div class="nk-gap"></div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="nk-gap"></div>
+                                        <strong class="text-white">Customer Rating:</strong>
+                                        <div class="nk-gap"></div>
+
+                                        @if (Model.Game.Rating != 0)
+                                        {
+
+                                            // Calculate the number of full stars and half star based on the Rating value
+                                            int fullStars = (int)Math.Floor((decimal)Model.Game.Rating);
+                                            bool hasHalfStar = Model.Game.Rating - fullStars >= 0.5;
+
+                                            <div class="nk-product-rating" data-rating="@Model.Game.Rating">
+                                                @for (int i = 0; i < 5; i++)
+                                                {
+                                                    if (i < fullStars)
+                                                    {
+                                                    // Render full star icon
+                                                        <i class="fa fa-star"></i>
+                                                    }
+                                                    else if (hasHalfStar && i == fullStars)
+                                                    {
+                                                    // Render half star icon
+                                                        <i class="fas fa-star-half"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                    // Render empty star icon
+                                                        <i class="far fa-star"></i>
+                                                    }
+                                                }
+                                            </div>
+                                        }
+
+
+                                        <div class="nk-gap"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END: Tab Description -->
+
+
+
+
+                            <!-- START: Tab Reviews -->
+                            <div role="tabpanel" class="tab-pane fade" id="tab-reviews">
+                                <div class="nk-gap-2"></div>
+                                <!-- START: Reply -->
+                                <h3 class="h4">Add a Review</h3>
+                                <div class="nk-reply">
+                                    <form asp-action="Product" asp-controller="Store" method="post" class="nk-form">
+                                       
+                                            <div class="row vertical-gap sm-gap">
+                                                <div class="col-sm-6">
+                                                <input type="text" class="form-control required"  name="Title" placeholder="Title *">
+                                                </div>
+                                            </div>
+                                            <div class="nk-gap-1"></div>
+                                        <textarea class="form-control required" rows="5" placeholder="Your Review *"  name="Comment" aria-required="true"></textarea>
+                                            <div class="nk-gap-1"></div>
+                                            <input type="hidden" asp-for="@Model.Game.Id"  />
+
+
+                                        <div class="nk-rating">
+                                            <input type="radio" id="review-rate-5" name="Rating" value="5">
+                                            <label for="review-rate-5">
+                                                <span><i class="far fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                            </label>
+
+                                            <input type="radio" id="review-rate-4" name="Rating" value="4">
+                                            <label for="review-rate-4">
+                                                <span><i class="far fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                            </label>
+
+                                            <input type="radio" id="review-rate-3" name="Rating" value="3">
+                                            <label for="review-rate-3">
+                                                <span><i class="far fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                            </label>
+
+                                            <input type="radio" id="review-rate-2" name="Rating" value="2">
+                                            <label for="review-rate-2">
+                                                <span><i class="far fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                            </label>
+
+                                            <input type="radio" id="review-rate-1" name="Rating" value="1">
+                                            <label for="review-rate-1">
+                                                <span><i class="far fa-star"></i></span>
+                                                <span><i class="fa fa-star"></i></span>
+                                            </label>
+                                        </div>
+                                        <button class="nk-btn nk-btn-rounded nk-btn-color-dark-3 float-right">Submit</button>
+
+
+
+                                    </form>
+                                </div>
+                                <!-- END: Reply -->
+
+                                <div class="clearfix"></div>
+                                <div class="nk-gap-2"></div>
+                                <div class="nk-comments">
+                                    <!-- START: Review -->
+                                    @foreach (var comment in Model.Comments)
+                                    {
+                                        <div class="nk-comment">
+                                            <div class="nk-comment-meta">
+                                                <img src="~/assets/images/UserAvatar/@comment.UserAvatar" alt="@comment.UserName" class="rounded-circle" width="35"> by <a href="https://nkdev.info">@comment.UserName</a> in @comment.CreatedAt
+
+                                                @if (comment.Ratings != 0)
+                                                {
+
+                                                    // Calculate the number of full stars and half star based on the Rating value
+                                                    int fullStars = (int)Math.Floor((decimal)comment.Ratings);
+                                                    bool hasHalfStar = (decimal)comment.Ratings - fullStars >= 0.5m;
+
+                                                    <div class="nk-product-rating" data-rating="@comment.Ratings">
+                                                        @for (int i = 0; i < 5; i++)
+                                                        {
+                                                            if (i < fullStars)
+                                                            {
+                                                        
+                                                                <i class="fa fa-star"></i>
+                                                            }
+                                                            else if (hasHalfStar && i == fullStars)
+                                                            {
+                                                      
+                                                                <i class="fas fa-star-half"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                           
+                                                                <i class="far fa-star"></i>
+                                                            }
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="nk-comment-text">
+                                                <p>Title : <span>@comment.Title</span> </p>
+                                                <p> @comment.Comment </p>
+                                            </div>
+                                        </div>
+                                    }
+                                 
+
+                            
+                                </div>
+                            </div>
+                            <!-- END: Tab Reviews -->
+
+                        </div>
+                    </div>
+                    <!-- END: Tabs -->
+                </div>
+
+
+
+                <!-- START: Related Products -->
+
+                <div class="nk-gap-3"></div>
+                <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Related</span> Products</span></h3>
+                <div class="nk-gap"></div>
+                <div class="row vertical-gap">
+                    @foreach (var related in Model.RelatedGames)
+                    {
+                        <div class="col-md-6">
+                            <div class="nk-product-cat">
+                             
+                               
+                                    @if (related.ScreenShots != null)
+                                    {
+                                        <a class="nk-product-image" asp-controller="Store" asp-action="Product" asp-route-Id="@related.Id">
+                                            <img src="~/assets/images/GameImages/@related.ScreenShots.First()" alt="@related.Name" style="width:100%; height:205px;">
+                                        </a>
+
+                                    }
+                                
+
+                                
+                             
+
+                                <div class="nk-product-cont">
+                                    <h3 class="nk-product-title h5"><a href="store-product.html"></a></h3>
+                                    <div class="nk-gap-1">@related.Name</div>
+
+                                    @if (related.Rating != 0)
+                                    {
+
+                                        // Calculate the number of full stars and half star based on the Rating value
+                                        int fullStars = (int)Math.Floor(related.Rating);
+                                        bool hasHalfStar = related.Rating - fullStars >= 0.5;
+
+                                        <div class="nk-product-rating" data-rating="@related.Rating">
+                                            @for (int i = 0; i < 5; i++)
+                                            {
+                                                if (i < fullStars)
+                                                {
+                                                    // Render full star icon
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                else if (hasHalfStar && i == fullStars)
+                                                {
+                                                    // Render half star icon
+                                                    <i class="fas fa-star-half"></i>
+                                                }
+                                                else
+                                                {
+                                                    // Render empty star icon
+                                                    <i class="far fa-star"></i>
+                                                }
+                                            }
+                                        </div>
+                                    }
+                                    <div class="nk-gap-1"></div>
+                                    <div class="nk-product-price">€  @related.Price</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                 
+
+                </div>
+                @* @await Component.InvokeAsync("RelatedGames") *@
+                <!-- END: Related Products -->
+
+            </div>
+
+        </div>
+    </div>
+    <div class="nk-gap-2"></div>
+
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model Application.ViewModel.AdminSide.AdminHomeViewModel;
+
+
+@{
+    Layout = "_AdminLayout";
+}
+
+  @foreach (var mcs in Model.contactMessages)
+ {
+
+
+     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom:7px;">
+          <div class="review-tab-pro-inner">
+     
+       
+              <div id="myTabContent" class="tab-content custom-product-edit">
+
+                <div class="product-tab-list tab-pane fade active in" id="description">
+
+                    <div class="row">
+                        <div>
+                            <div class="review-content-section">
+                                <div class="input-group mg-b-pro-edt">
+                                    <span class="input-group-addon"><i class="fa fa-info" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" asp-for="@mcs.Id" readonly style="color:black;">
+                                </div>
+                                <div class="input-group mg-b-pro-edt">
+                                    <span class="input-group-addon"><i class="icon nalika-user" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" asp-for="@mcs.UserName" readonly style="color:black;">
+                                </div>
+                                <div class="input-group mg-b-pro-edt">
+                                    <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true" ></i></span>
+                                    <input type="text" class="form-control" asp-for="@mcs.Email" readonly style="color:black;">
+                                </div>
+                                <div class="input-group mg-b-pro-edt">
+                                    <span class="input-group-addon"><i class="icon nalika-edit" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" asp-for="@mcs.Title" readonly style="color:black;">
+                                </div>
+                                <div class="input-group mg-b-pro-edt">
+                                    <span class="input-group-addon"><i class="icon nalika-new-file" aria-hidden="true"></i></span>
+                                    <textarea rows="5" type="" class="form-control" asp-for="@mcs.Message" readonly style="color:black;"> </textarea>
+                                </div>
+                                <div class="input-group mg-b-pro-edt">
+                                    <span class="input-group-addon"><i class="icon nalika-favorites" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" asp-for="@mcs.Time" readonly style="color:black;">
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+               
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="text-center custom-pro-edt-ds">
+
+                                
+                                    <a asp-area="Admin" asp-controller="Home" asp-action="DeleteMessage" asp-route-Id="@mcs.Id" type="button" class="btn btn-ctl-bt waves-effect waves-light" onclick="return confirm('Are you sure you want to Delete This Message?')">
+                                        Delete
+                                    </a>
+                               
+                              
+                      
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            
+            
+           </div>
+        
+    </div>
+    </div>
+}
+
+

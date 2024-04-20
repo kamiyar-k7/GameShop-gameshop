@@ -1,0 +1,359 @@
+﻿@model List<Application.DTOs.UserSide.StorePart.StoreDto>
+
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="nk-main">
+
+    <div class="nk-gap-2"></div>
+
+
+
+    <div class="container">
+        <!-- START: Image Slider -->
+
+        <div>
+            <section class="section__slider">
+                <div class="container__center">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            @{
+                                // Sort games by Rating in descending order and select the top 5
+                                var newest = Model.OrderByDescending(g => g.ReleaseDate).Take(5);
+                            }
+                            @foreach (var item in newest)
+                            {
+                                <div class="swiper-slide">
+                                    <div class="swiper-slide__block">
+
+                                        <div class="swiper-slide__block__img" data-swiper-parallax-y="70%">
+                                            <a target="_blank">
+                                                <img src="~/assets/images/GameImages/@item.Screenshots.First()" alt="aa" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="swiper-slide__block__text">
+                                            <p data-swiper-parallax-x="-60%" class="main__title">
+                                                @item.Name
+
+                                                <span>.</span>
+                                            </p>
+                                            <h3 data-swiper-parallax-x="-50%" class="main__subtitle">
+                                                Relese Date
+                                                <span> • @item.ReleaseDate</span>
+                                            </h3>
+                                            <p data-swiper-parallax-x="-40%" class="paragraphe">@item.Description</p>
+                                            <a data-swiper-parallax-x="-30%" class="link" asp-controller="Store" asp-action="Product" asp-route-Id="@item.Id">Discover</a>
+                                            <span data-swiper-parallax-y="60%" class="number">1</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+                        <div class="swiper-button-next">
+                            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </div>
+                        <div class="swiper-button-prev">
+                            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+
+        <div class="nk-gap"></div>
+        <!-- END: Image Slider -->
+        <!-- START: Categories -->
+        <div class="row vertical-gap">
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-mouse.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a asp-controller="Store" asp-action="Catalog">Games</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a asp-controller="Store" asp-action="Catalog">View Games</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-gamepad.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a asp-controller="Home" asp-action="AboutUS">About Us</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a asp-controller="Home" asp-action="AboutUs">Contact Us</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="nk-feature-1">
+                    <div class="nk-feature-icon">
+                        <img src="~/assets/images/icon-gamepad-2.png" alt="">
+                    </div>
+                    <div class="nk-feature-cont">
+                        <h3 class="nk-feature-title"><a asp-action="SignUp" asp-controller="Account">Sign Up</a></h3>
+                        <h3 class="nk-feature-title text-main-1"><a asp-action="SignUp" asp-controller="Account">Lets Go</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Categories -->
+        <!-- START: Latest News -->
+        <!-- END: Latest News -->
+
+        <div class="nk-gap-2"></div>
+        <div class="row vertical-gap">
+            <div class="col-lg-8">
+
+                <!-- START: Latest Posts -->
+                <!-- END: Latest Posts -->
+                <!-- START: Latest Matches -->
+                <!-- END: Latest Matches -->
+                <!-- START: Tabbed News  -->
+                <!-- END: Tabbed News -->
+                <!-- START: Latest Pictures -->
+                <!-- END: Latest Pictures -->
+
+                <div class="nk-widget">
+                    <div class="nk-widget-content">
+                        <form method="post" asp-controller="Store" asp-action="Catalog" class="nk-form nk-form-style-1" novalidate="novalidate">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Type something..." name="search">
+                                <button class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
+                <!-- START: Our Games -->
+                <div class="nk-gap-3"></div>
+                <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Our</span> Games</span></h3>
+                <div class="nk-gap"></div>
+                <div class="row vertical-gap">
+                    @{
+                        var ordered = Model.OrderByDescending(x => x.ReleaseDate).ToList();
+                    }
+
+                    @foreach (var Game in ordered)
+                    {
+
+                        <div class="col-md-6">
+                            <div class="nk-product-cat">
+                                @if (Game.Screenshots.Any())
+                                {
+                                    var firstscreenshot = Game.Screenshots.First();
+                                    <a class="nk-product-image" asp-controller="Store" asp-action="Product" asp-route-Id="@Game.Id">
+                                        <img src="~/assets/images/GameImages/@firstscreenshot" alt="@Game.Name" style="width:100%; height:205px">
+                                    </a>
+                                }
+
+                                <div class="nk-product-cont">
+                                    <h3 class="nk-product-title h5">@Game.Name</h3>
+                                    <div class="nk-gap-1"></div>
+
+
+                                    @{
+                                        // Calculate the number of full stars and half star based on the Rating value
+                                        int fullStars = (int)Math.Floor(Game.Rating);
+                                        bool hasHalfStar = Game.Rating - fullStars >= 0.5;
+                                    }
+
+                                    <div class="nk-product-rating" data-rating="@Game.Rating">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (i < fullStars)
+                                            {
+                                                // Render full star icon
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            else if (hasHalfStar && i == fullStars)
+                                            {
+                                            // Render half star icon
+                                                <i class="fas fa-star-half"></i>
+                                            }
+                                            else
+                                            {
+                                            // Render empty star icon
+                                                <i class="far fa-star"></i>
+                                            }
+                                        }
+                                    </div>
+
+
+                                    <div class="nk-gap-1"></div>
+                                    <div class="nk-product-price">€ @Game.Price</div>
+                                    <div class="nk-gap-1"></div>
+                                    <a class="nk-btn nk-btn-rounded nk-btn-color-dark-3 nk-btn-hover-color-main-1" asp-controller="Store" asp-action="Product" asp-route-Id="@Game.Id">Show Game</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+                <!-- END: Our Games -->
+                <div class="nk-gap"></div>
+                <hr />
+                <div class="nk-pagination nk-pagination-center">
+                    @if (ViewBag.PageId > 1)
+                    {
+                        <a href="/Home/Index?pageId=@(ViewBag.PageId - 1)" class="nk-pagination-prev">
+                            <span class="ion-ios-arrow-back"></span>
+                        </a>
+                    }
+                    <nav>
+                        @for (int i = 1; i <= ViewBag.pagecount; i++)
+                        {
+                            <a class="@(((int)ViewBag.PageId == i) ? "nk-pagination-current" : "nk-pagination")" href="@Url.Action("Index", "Home", new { pageId = i })">@i</a>
+                        }
+                    </nav>
+                    @if (ViewBag.PageId < ViewBag.pagecount)
+                    {
+                        <a href="/Home/Index?pageId=@(ViewBag.PageId + 1)" class="nk-pagination-next">
+                            <span class="ion-ios-arrow-forward"></span>
+                        </a>
+                    }
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <div class="col-lg-4">
+                <!--
+                    START: Sidebar
+
+                    Additional Classes:
+                        .nk-sidebar-left
+                        .nk-sidebar-right
+                        .nk-sidebar-sticky
+                -->
+                <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">We</span> Are Social</span></h4>
+                        <div class="nk-widget-content">
+
+
+                            <ul class="nk-social-links-3 nk-social-links-cols-4">
+                                <li><a class="nk-social-twitch" href="#"><span class="fab fa-twitch"></span></a></li>
+                                <li><a class="nk-social-instagram" href="#"><span class="fab fa-instagram"></span></a></li>
+                                <li><a class="nk-social-steam" href="#"><span class="fab fa-steam"></span></a></li>
+                                <li><a class="nk-social-youtube" href="#"><span class="fab fa-youtube"></span></a></li>
+                                <li><a class="nk-social-twitter" href="https://twitter.com/nkdevv" target="_blank"><span class="fab fa-twitter"></span></a></li>
+                                <li><a class="nk-social-reddit" href="#"><span class="fab fa-reddit"></span></a></li>
+
+                                <!-- Additional Social Buttons
+                                    <li><a class="nk-social-behance" href="#"><span class="fab fa-behance"></span></a></li>
+                                    <li><a class="nk-social-bitbucket" href="#"><span class="fab fa-bitbucket"></span></a></li>
+                                    <li><a class="nk-social-dropbox" href="#"><span class="fab fa-dropbox"></span></a></li>
+                                    <li><a class="nk-social-dribbble" href="#"><span class="fab fa-dribbble"></span></a></li>
+                                    <li><a class="nk-social-deviantart" href="#"><span class="fab fa-deviantart"></span></a></li>
+                                    <li><a class="nk-social-flickr" href="#"><span class="fab fa-flickr"></span></a></li>
+                                    <li><a class="nk-social-foursquare" href="#"><span class="fab fa-foursquare"></span></a></li>
+                                    <li><a class="nk-social-github" href="#"><span class="fab fa-github"></span></a></li>
+                                    <li><a class="nk-social-linkedin" href="#"><span class="fab fa-linkedin"></span></a></li>
+                                    <li><a class="nk-social-medium" href="#"><span class="fab fa-medium"></span></a></li>
+                                    <li><a class="nk-social-odnoklassniki" href="#"><span class="fab fa-odnoklassniki"></span></a></li>
+                                    <li><a class="nk-social-paypal" href="#"><span class="fab fa-paypal"></span></a></li>
+                                    <li><a class="nk-social-reddit" href="#"><span class="fab fa-reddit"></span></a></li>
+                                    <li><a class="nk-social-skype" href="#"><span class="fab fa-skype"></span></a></li>
+                                    <li><a class="nk-social-soundcloud" href="#"><span class="fab fa-soundcloud"></span></a></li>
+                                    <li><a class="nk-social-steam" href="#"><span class="fab fa-steam"></span></a></li>
+                                    <li><a class="nk-social-slack" href="#"><span class="fab fa-slack"></span></a></li>
+                                    <li><a class="nk-social-tumblr" href="#"><span class="fab fa-tumblr"></span></a></li>
+                                    <li><a class="nk-social-vimeo" href="#"><span class="fab fa-vimeo"></span></a></li>
+                                    <li><a class="nk-social-vk" href="#"><span class="fab fa-vk"></span></a></li>
+                                    <li><a class="nk-social-wordpress" href="#"><span class="fab fa-wordpress"></span></a></li>
+                                -->
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Most</span> Popular</span></h4>
+                        @{
+                            // Sort games by Rating in descending order and select the top 5
+                            var top5Games = Model.OrderByDescending(g => g.Rating).Take(5);
+                        }
+                        @foreach (var Game in top5Games)
+                        {
+
+                            <div class="nk-widget-content">
+
+                                <div class="nk-widget-post">
+                                    @if (Game.Screenshots.Any())
+                                    {
+                                        var firstscreenshot = Game.Screenshots.First();
+                                        <a asp-controller="Store" asp-action="Product" asp-route-Id="@Game.Id" class="nk-post-image">
+                                            <img src="assets/images/GameImages/@firstscreenshot" alt="none" style="width:100%; height:205px">
+                                        </a>
+                                    }
+
+                                    <h3 class="nk-post-title"><a href="store-product.html">@Game.Name</a></h3>
+
+                                    <div class="nk-product-rating" data-rating="@Game.Rating">
+                                        @{
+                                            // Calculate the number of full stars and half star based on the Rating value
+                                            int fullStars1 = (int)Math.Floor(Game.Rating);
+                                            bool hasHalfStar1 = Game.Rating - fullStars1 >= 0.5;
+                                        }
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (i < fullStars1)
+                                            {
+                                                // Render full star icon
+                                                <i class="fa fa-star"></i>
+                                            }
+                                            else if (hasHalfStar1 && i == fullStars1)
+                                            {
+                                            // Render half star icon
+                                                <i class="fas fa-star-half"></i>
+                                            }
+                                            else
+                                            {
+                                            // Render empty star icon
+                                                <i class="far fa-star"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="nk-product-price">€ @Game.Price</div>
+                                </div>
+
+
+
+                            </div>
+                        }
+
+                    </div>
+
+
+
+                </aside>
+                <!-- END: Sidebar -->
+            </div>
+        </div>
+    </div>
+
+    <div class="nk-gap-4"></div>
+
+</div>
+

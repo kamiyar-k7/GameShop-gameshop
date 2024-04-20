@@ -1,0 +1,94 @@
+﻿@model Application.ViewModel.AdminSide.CommentsViewModel;
+
+
+@foreach (var comment in Model.Allcoments)
+{
+    <div class="single-product-tab-area mg-b-30">
+
+        <div class="single-pro-review-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="review-tab-pro-inner">
+
+                            <div id="myTabContent" class="tab-content custom-product-edit">
+
+                                <div class="product-tab-list tab-pane fade active in" id="INFORMATION">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                            <div class="review-content-section">
+                                                <div class="card-block">
+                                                    <div class="text-muted f-w-400">
+                                                       
+                                                    </div>
+                                                    <div class="m-t-10">
+                                                        <div class="txt-primary f-18 f-w-600">
+                                                            <p>@comment.UserName Rating</p>
+                                                        </div>
+                                                        <div class="review-rating">
+                                                            <fieldset class="rating">
+                                                                <input type="radio" id="star5" value="5" data-val="true" data-val-number="The field Rating must be a number." data-val-required="This Field is required" name="Game.Rating" @(comment.Ratings == 5m ? "checked" : "") disabled>
+                                                                <label class="full" for="star5"></label>
+                                                                <input type="radio" id="star4half" value="4.5" name="Game.Rating" @(comment.Ratings == 4.5m ? "checked" : "") disabled>
+                                                                <label class="half" for="star4half"></label>
+                                                                <input type="radio" id="star4" value="4" name="Game.Rating" @(comment.Ratings == 4m ? "checked" : "") disabled>
+                                                                <label class="full" for="star4"></label>
+                                                                <input type="radio" id="star3half" value="3.5" name="Game.Rating" @(comment.Ratings == 3.5m ? "checked" : "") disabled>
+                                                                <label class="half" for="star3half"></label>
+                                                                <input type="radio" id="star3" value="3" name="Game.Rating" @(comment.Ratings == 3m ? "checked" : "") disabled>
+                                                                <label class="full" for="star3"></label>
+                                                                <input type="radio" id="star2half" value="2.5" name="Game.Rating" @(comment.Ratings == 2.5m ? "checked" : "") disabled>
+                                                                <label class="half" for="star2half"></label>
+                                                                <input type="radio" id="star2" value="2" name="Game.Rating" @(comment.Ratings == 2m ? "checked" : "") disabled>
+                                                                <label class="full" for="star2"></label>
+                                                                <input type="radio" id="star1half" value="1.5" name="Game.Rating" @(comment.Ratings == 1.5m ? "checked" : "") disabled>
+                                                                <label class="half" for="star1half"></label>
+                                                                <input type="radio" id="star1" value="1" name="Game.Rating" @(comment.Ratings == 1m ? "checked" : "") disabled>
+                                                                <label class="full" for="star1"></label>
+                                                                <input type="radio" id="starhalf" value="0.5" name="Game.Rating" @(comment.Ratings == 0.5m ? "checked" : "") disabled>
+                                                                <label class="half" for="starhalf"></label>
+                                                            </fieldset>
+                                                        </div>
+                                                        <span class="text-danger field-validation-valid" data-valmsg-for="Game.Rating" data-valmsg-replace="true"></span>
+                                                        <div class="clear"></div>
+                                                    </div>
+                                                    <div class="input-group mg-b-15 mg-t-15">
+                                                        <span class="input-group-addon">User Name</span>
+                                                        <input type="text" class="form-control" placeholder="@comment.UserName" readonly style="background-color:transparent;">
+                                                    </div>
+                                                    <div class="input-group mg-b-15">
+                                                        <span class="input-group-addon">Title</span>
+                                                        <input type="text" class="form-control" placeholder="@comment.Title" readonly style="background-color:transparent;">
+                                                    </div>
+                                                    <div class="input-group mg-b-15">
+                                                        <span class="input-group-addon">Comment</span>
+                                                        <input rows="5" class="form-control" placeholder="@comment.Comment" readonly style="background-color:transparent;"> 
+
+                                                    </div>
+                                                    <div class="input-group mg-b-15">
+                                                        <span class="input-group-addon">Game Name</span>
+                                                        <input type="datetime" class="form-control" placeholder="@comment.GameName" readonly style="background-color:transparent;">
+                                                    </div>
+                                                    <div class="input-group mg-b-15">
+                                                        <span class="input-group-addon">Date</span>
+                                                        <input type="datetime" class="form-control" placeholder="@comment.CreatedAt" readonly style="background-color:transparent;">
+                                                    </div>
+                                                    
+                                                    <div class="form-group review-pro-edt mg-b-0-pt">
+                                                        <a asp-area="Admin" asp-controller="Games" asp-action="DeleteComment"  asp-route-Id="@comment.Id" class="btn btn-ctl-bt waves-effect waves-light">
+                                                         Delete
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

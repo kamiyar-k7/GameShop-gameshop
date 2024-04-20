@@ -1,0 +1,174 @@
+﻿@model List< Application.DTOs.UserSide.Account.CartDto>
+
+
+<div class="nk-main">
+
+    <!-- START: Breadcrumbs -->
+    <div class="nk-gap-1"></div>
+    <div class="container">
+        <ul class="nk-breadcrumbs">
+
+
+            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><a asp-controller="Account" asp-action="Index">My Account</a></li>
+
+
+            <li><span class="fa fa-angle-right"></span></li>
+
+            <li><span>Cart</span></li>
+
+        </ul>
+    </div>
+    <div class="nk-gap-1"></div>
+    <!-- END: Breadcrumbs -->
+
+
+
+
+    <div class="container">
+        <div class="nk-store nk-store-cart">
+            <div class="table-responsive">
+
+                <!-- START: Products in Cart -->
+                <table class="table nk-store-cart-products">
+                    <tbody>
+                        @if(Model != null)
+                        {
+                        @foreach (var game in Model)
+                        {
+
+
+                            <tr>
+                                <td class="nk-product-cart-thumb">
+                                    <a asp-controller="Store" asp-action="Product" asp-route-Id="@game.GameId" class="nk-image-box-1 nk-post-image">
+                                        <img src="~/assets/images/GameImages/@game.Screenshot" alt="@game.GameName" width="100%" height="150px">
+                                    </a>
+                                </td>
+                                <td class="nk-product-cart-title">
+                                    <h5 class="h6">Product:</h5>
+                                    <div class="nk-gap-1"></div>
+
+                                    <h2 class="nk-post-title h4">
+                                        <a href="store-product.html">@game.GameName</a>
+                                    </h2>
+                                </td>
+                                <td class="nk-product-cart-price">
+                                    <h5 class="h6">Price:</h5>
+                                    <div class="nk-gap-1"></div>
+
+                                    <strong>€ @game.Price</strong>
+                                </td>
+                                <td class="nk-product-cart-price">
+                                    <h5 class="h6">Platform:</h5>
+                                    <div class="nk-gap-1"></div>
+
+                                    <strong>@game.Platform</strong>
+                                </td>
+                                <td class="nk-product-cart-quantity">
+                                    <h5 class="h6">Quantity:</h5>
+                                    <div class="nk-gap-1"></div>
+
+                                    <div class="nk-form">
+                                        <input type="number" class="form-control" value="@game.Quantity" min="1" max="100" readonly style="background-color: transparent">
+                                    </div>
+                                </td>
+                                <td class="nk-product-cart-total">
+                                    <h5 class="h6">Total: </h5>
+                                    <div class="nk-gap-1"></div>
+                                    @{
+                                        var total = game.Price * game.Quantity;
+                                    }
+                                    <strong>€ @total</strong>
+                                </td>
+                                <td class="nk-product-cart-remove"> <a asp-controller="Order" asp-action="DeleteCart" asp-route-Id="@game.Id"> <span class="ion-android-close"></span> </a> </td>
+                            </tr>
+                        }
+                            
+                        }
+
+
+                    </tbody>
+                </table>
+                <!-- END: Products in Cart -->
+
+            </div>
+            <div class="nk-gap-1"></div>
+            <a class="nk-btn nk-btn-rounded nk-btn-color-white float-right" asp-action="Catalog" asp-controller="Store">Update Cart</a>
+
+            <div class="clearfix"></div>
+            <div class="nk-gap-2"></div>
+            <div class="row vertical-gap">
+
+                <div class="col-md-6">
+                    <!-- START: Cart Totals -->
+                    <h3 class="nk-title h4">Cart Totals</h3>
+                    <table class="nk-table nk-table-sm">
+                        <tbody>
+
+                            <tr class="nk-store-cart-totals-total">
+                                <td>
+                                    Total
+                                </td>
+                                @{
+                                    decimal total1 = 0;
+                                    if(Model != null)
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+
+                                            total1 += item.Price * item.Quantity;
+                                        }
+                                        <td>
+
+
+                                            € @total1
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            € 0
+                                        </td>
+                                    }
+
+                                }
+
+
+
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <!-- END: Cart Totals -->
+                </div>
+            </div>
+
+            <div class="nk-gap-2"></div>
+
+
+
+            <a class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" asp-controller="Order" asp-action="CheckOut">Proceed to Checkout</a>
+
+
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="nk-gap-2"></div>
+
+
+
+
+
+
+</div>
+
+
+

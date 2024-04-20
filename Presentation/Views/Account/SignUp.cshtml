@@ -1,0 +1,72 @@
+﻿@model   Application.DTOs.UserSide.Account.SignUpDto;
+
+@{
+
+    Layout = "_AccountLayout";
+}
+
+
+
+
+
+
+
+<div class="padding-all">
+    <div class="header">
+        <h1><img src="/Login/images/5.png" alt=" "> Gaming Login Form</h1>
+    </div>
+
+    <div class="design-w3l">
+        <div class="mail-form-agile">
+            <form asp-controller="Account" asp-action="SignUp" method="post">
+                <input type="text" asp-for="UserName" placeholder="Enter UserName" class="padding" />
+                <span asp-validation-for="UserName"></span>
+                <input type="email" asp-for="Email" placeholder="MyEmail@Email.com" required="" class="padding">
+                <input type="tel" asp-for="PhoneNumber" placeholder="PhoneNumber" required class="padding" pattern="[0-9]+" title="Please enter numbers only">
+                <input type="password" asp-for="Password" class="padding" placeholder="Password" required="">
+                <span asp-validation-for="Password"></span>
+                <input type="password" asp-for="RepeatPassword" class="padding" placeholder="Repeat Password" required="">
+                <span asp-validation-for="RepeatPassword"></span>
+
+                @if (TempData.ContainsKey("ErrorMessage"))
+                {
+                    <div class="mail-form-agile" style="padding:5px; color:red;">
+                        @TempData["ErrorMessage"]
+                    </div>
+                }
+                <div>
+                    <label class="padding" style="color:white"><a href="#">Forgot Password?</a></label>
+                    <br />
+                    <br />
+                    <label class="padding" style="color:white">Already Have An Account? <a asp-action="SignIn" asp-controller="Account">Sign In</a></label>
+                </div>
+                <br />
+                <input type="submit" value="Submit" class="padding">
+            </form>
+         
+            @Html.ValidationSummary(true, "", new { @class = "mail-form-agile" })
+
+        </div>
+
+        <div class="clear"> </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 Gaming Shop All Rights Reserved   <a href="#">   </a></p>
+    </div>
+</div>
+
+
+
+<style>
+    .alert-danger {
+        color: red;
+        background-color: black;
+        border-color: #f5c6cb;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+
+</style>

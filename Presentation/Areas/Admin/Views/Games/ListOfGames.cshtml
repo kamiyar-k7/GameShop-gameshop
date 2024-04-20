@@ -1,0 +1,107 @@
+﻿@model Application.ViewModel.UserSide.ProductViewModel;
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="product-status mg-b-30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="product-status-wrap">
+                    <h4>Products List</h4>
+                    <div class="add-product">
+                        <a asp-area="Admin" asp-controller="Games" asp-action="AddGame" >Add Product</a>
+                    </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Image</th>
+                                <th>Product Title</th>
+                                <th>Status</th>
+                                <th>Quantity</th>
+                              
+                               
+                                <th>Price</th>
+                                <th>Setting</th>
+                            </tr>
+                      
+                            @foreach (var game in Model.ListGames)
+                            {
+                                <tr>
+                                    @if(game.ScreenShots != null && game.ScreenShots.Any())
+                                    {
+
+                                        <td><img src="~/assets/images/GameImages/@game.ScreenShots.FirstOrDefault()" alt="Game Screenshot"></td>
+                                    }
+                                    else
+                                    {
+                                        <td><img src="" alt="Game Screenshot"></td>
+                                    }
+
+                                    <td>@game.Name</td>
+
+                                    @if(game.Status == Domain.entities.GamePart.Game.GameStatus.Active)
+                                    {
+                                       
+                                        <td>
+                                            <button class="pd-setting">@game.Status.ToString()</button>
+                                        </td>
+                                    }
+                                    else if (game.Status == Domain.entities.GamePart.Game.GameStatus.InActive)
+                                    {
+                                        <td>
+                                            <button class="ds-setting">@game.Status.ToString()</button>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <button class="ps-setting">@game.Status.ToString()</button>
+                                        </td>
+                                    }
+                                    
+
+                                    <td>@game.Quantity</td>
+                                 
+                                    
+                                    <td>@game.Price</td>
+
+                                    <td>
+                                        <a asp-area="Admin" asp-controller="Games" asp-action="GameDetails" asp-route-Id="@game.Id" style="padding:5px;" data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Edit" type="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        <a asp-area="Admin" asp-controller="Games" asp-action="DeleteGame" asp-route-Id="@game.Id" style="padding:5px;" data-toggle="tooltip" title="" class="pd-setting-ed" data-original-title="Trash" type="button" onclick="return confirm('are you sure you want Delete User ?')"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                            
+                         
+                        </tbody>
+                    </table>
+                    <div class="custom-pagination">
+                        <ul class="pagination">
+
+                            @if (ViewBag.PageId > 1)
+                            {
+                                <li class="page-item"><a class="page-link" href="/Admin/Games/ListOfPlatforms?pageid=@(ViewBag.PageId - 1)">Previous</a></li>
+                            }
+
+                            @for (int i = 1; i <= ViewBag.pagecount; i++)
+                            {
+                                <li class="page-item"><a class="page-link @(((int)ViewBag.PageId == i) ? "active" : "")" href="/Admin/Games/ListOfPlatforms?pageId=@i">@i</a></li>
+                            }
+
+                            @if (ViewBag.PageId < ViewBag.pagecount)
+                            {
+                                <li class="page-item"><a class="page-link" href="/Admin/Games/ListOfPlatforms?pageId=@(ViewBag.PageId + 1)">Next</a></li>
+                            }
+
+                        </ul>
+                    </div>
+
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
